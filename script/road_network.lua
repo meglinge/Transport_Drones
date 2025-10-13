@@ -532,7 +532,7 @@ local floor = math.floor
 local road_tiles = nil
 local road_tile_names = nil
 
-local check_init_tiles = function()
+local get_or_init_tiles = function()
   if road_tiles then return road_tiles end
 
   local mask = prototypes.tile["transport-drone-road"].collision_mask
@@ -559,12 +559,12 @@ local check_init_tiles = function()
 end
 
 road_network.get_road_tiles = function()
-  check_init_tiles()
+  get_or_init_tiles()
   return road_tiles
 end
 
 road_network.get_road_tile_names = function()
-  check_init_tiles()
+  get_or_init_tiles()
   return road_tile_names
 end
 
