@@ -9,35 +9,6 @@ data:extend {
 }
 local tiles = data.raw.tile
 
-
-local road_list = {}
-local road_tile_list =
-{
-  type = "selection-tool",
-  name = "road-tile-list",
-  hidden = true,
-  icon = "__Transport_Drones_Meglinge_Fork__/data/tf_util/empty-sprite.png",
-  icon_size = 1,
-  tile_filters = {
-    "transport-drone-road",
-    "transport-drone-road-better"
-  },
-  stack_size = 1,
-  select =
-  {
-    border_color = { 1, 1, 1 },
-    mode = { "any-tile" },
-    cursor_box_type = "entity",
-  },
-  alt_select =
-  {
-    border_color = { 0, 1, 0 },
-    mode = { "any-tile" },
-    cursor_box_type = "entity",
-  }
-}
-data:extend { road_tile_list }
-
 local place_as_tile_condition = { layers = { water_tile = true } }
 
 if mods["space-exploration"] then
@@ -51,7 +22,6 @@ local process_road_item = function(item)
   local seen = {}
   while true do
     tile.collision_mask = { layers = { roadtd = true } }
-    table.insert(road_list, tile.name)
     seen[tile.name] = true
     tile = tiles[tile.next_direction or ""]
     if not tile then break end

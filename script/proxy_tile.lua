@@ -2,23 +2,8 @@
 
 local road_network = require("script/road_network")
 
-local road_tile_list_name = "road-tile-list"
-local road_tiles
-local tile_filters = {
-  "transport-drone-road",
-  "transport-drone-road-better"
-}
-local get_road_tiles = function()
-  if road_tiles then return road_tiles end
-  road_tiles = {}
-  for _, tile_name in pairs (tile_filters) do
-    road_tiles[tile_name] = true
-  end
-  return road_tiles
-end
-
 local is_road_tile = function(name)
-  return get_road_tiles()[name]
+  return road_network.get_road_tiles()[name]
 end
 
 local raw_road_tile_built = function(event)
