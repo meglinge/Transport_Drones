@@ -99,8 +99,10 @@ end
 function fuel_depot:update_circuit_reader()
   if self.circuit_reader and self.circuit_reader.valid then
     local behavior = self.circuit_reader.get_or_create_control_behavior()
-    local signal = {signal = {type = "fluid", name = get_fuel_fluid()}, count = self:get_fuel_amount()}
-    behavior.set_signal(1, signal)
+    if (behavior.sections_count == 0) then behavior.add_section() end
+    local section = behavior.get_section(1)
+    local signal = {value = {type = "fluid", name = get_fuel_fluid(), quality = "normal"},  min = self:get_fuel_amount(), max = self:get_fuel_amount()}
+    section.set_slot(1, signal)
   end
 end
 

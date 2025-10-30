@@ -128,8 +128,8 @@ function fluid_depot:update_contents()
     if not name then
       local box = self:get_output_fluidbox()
       if box then
-        content.name = box.name
-        content.count = box.amount
+        name = box.name
+        content = {name = box.name,count = box.amount,quality = ""}
       end
     end
     local signal
